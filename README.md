@@ -23,3 +23,28 @@ Built a virtualized enterprise IT infrastructure environment using **Windows Ser
 
 ### 4. Group Policy Enforcement on Windows 11
 ![GPO Enforcement](4-gpo-restriction-proof.png)
+### 5. Shared Folders & NTFS Permissions
+- Created a centralized `IT_Documents` network share on `DC01` (`\\DC01\IT_Documents`).
+- Restricted SMB Share permissions exclusively to the `IT_Staff` security group.
+- Disabled NTFS inheritance and removed broad `Users` access to enforce least-privilege file security.
+
+![Shared Folder and NTFS Permissions](./05-shared-folder-ntfs-permissions.png)
+
+---
+
+### 6. User Onboarding & Offboarding Lifecycle
+- **Onboarding:** Provisioned a new employee account (`Alex Smith` / `asmith`), assigned `IT_Staff` group membership, and automatically mapped the `Z:` network drive to `\\DC01\IT_Documents`.
+- **Offboarding:** Executed a standard security offboarding checklist by resetting the account password, revoking security group memberships, disabling the Active Directory account, and migrating it to a dedicated `Disabled_Users` quarantine OU.
+
+![User Onboarding and Offboarding](./06-user-onboarding-offboarding.png)
+
+---
+
+### 7. Backup & Disaster Recovery
+- Provisioned a dedicated secondary virtual disk (`E:`) and installed the **Windows Server Backup** feature on `DC01`.
+- Executed a custom volume/folder backup of critical `IT_Documents` data.
+- Simulated an accidental file deletion (`Confidential_Passwords.txt`) and successfully restored the file to its original location using Windows Server Backup Recovery.
+
+![Backup and Restoration](./07-backup-and-restoration.png)
+
+
